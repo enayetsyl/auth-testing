@@ -6,7 +6,7 @@ export function middleware(request){
   const path = request.nextUrl.pathname;
   const isPublicPath = path === "/login" || path === "/register"
   // console.log(path)
-  const token = request.cookies.get('next-auth.session-token')?.value || ''
+  const token = request.cookies.get('_Secure-next-auth.session-token')?.value || ''
 
   if(isPublicPath && token){
     return NextResponse.redirect(new URL('/client', request.nextUrl))
