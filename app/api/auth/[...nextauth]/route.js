@@ -16,7 +16,6 @@ export const authOptions = {
       credentials: {},
       async authorize(credentials){
         const { email, password } = credentials
-        // console.log(email)
         try {
           await connect()
           const user = await User.findOne({email})
@@ -42,14 +41,12 @@ export const authOptions = {
     async signIn({user, account}){
       if(account.provider === 'google'){
         const {name, email} = user
-        // console.log('google user info', user)
-        // console.log('google user name and email', name, email)
         try {
           await connect()
           const userExist = await User.findOne({email})
           const password = null
           if(!userExist){
-            const res = await fetch('https://auth-testing-mu.vercel.app/api/register', {
+            const res = await fetch('/api/register', {
               method:"POST",
               headers: {
                 "Content-Type": 'application/json'
@@ -65,16 +62,7 @@ export const authOptions = {
           }
 
           return user
-          // else {
-          //   try {
-          //     await connect()
-          //     const user = await User.findOne({email})
-          //     console.log('server user',user)
-          //     return user
-          //   } catch (error) {
-          //     console.log(error)
-          //   }
-          // }
+        
         } catch (error) {
         console.log(error)   
         }
@@ -85,32 +73,13 @@ export const authOptions = {
       }
     },
     async jwt({token, user}){
-      // console.log('google user in jwt', user)
-      // console.log('token', token)
-      const email = token.email
-      console.log('email in token', email
-      )
-      await connect()
-      try {
-        const user = await User.findOne({email})
-        console.log('user in token', user._id)
-        console.log('token in token', token)
-        
-      } catch (error) {
-        
-      }
-      return token
+    
+       return token
     }, 
     async session({session, token}){
-      const id = token.sub;
-      console.log('token in session',token)
-      // await connect()
-          // const user = await User.findById(id)
+      
           session.user.name = token.name
           session.user.email = token.email
-          // session.user.createdAt = user.createdAt
-          // console.log('session user', user)
-      console.log('session', session )
       return session
     }
   },
