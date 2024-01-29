@@ -20,4 +20,9 @@ export {default} from "next-auth/middleware"
 //   // console.log(token)
 // }
 
+export function middleware (request) {
+  const token = request.cookies.get('__Secure-next-auth.session-token')?.value
+  console.log("token in middleware", token)
+}
+
 export const config = {matcher: ["/client/:path*"]}
