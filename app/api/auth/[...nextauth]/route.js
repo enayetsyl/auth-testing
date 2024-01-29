@@ -44,7 +44,7 @@ export const authOptions = {
         try {
           await connect()
           const userExist = await User.findOne({email})
-          const password = null
+          // const password = null
           if(!userExist){
             const res = await fetch('https://auth-testing-mu.vercel.app/api/register', {
               method:"POST",
@@ -53,7 +53,7 @@ export const authOptions = {
               },
               body: JSON.stringify({
                 name, email, 
-                password,
+                // password,
               })
             })
             if(res.ok){
