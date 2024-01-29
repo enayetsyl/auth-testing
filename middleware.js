@@ -23,4 +23,4 @@ export function middleware(request){
 //   console.log("token in middleware", token)
 // }
 
-export const config = {matcher: ["/client/:path*", "/register", "/login"]}
+export const config = {matcher: ["/client/:path*", "/register", "/login", "/"]}
